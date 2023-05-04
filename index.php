@@ -56,19 +56,31 @@ $hotels = [
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">key 1</th>
-                <th scope="col">key 2</th>
-                <th scope="col">key 3</th>
-                <th scope="col">key 4</th>
-                <th scope="col">key 5</th>
+                <?php foreach ($hotels[0] as $key => $hotel_arr) { ?>
+                    <th scope="col"><?php 
+                    if ($key === 'distance_to_center') {
+                        echo "Distance to center";
+                    } else {
+                        echo ucfirst($key); 
+                    }?></th>
+                <?php } ?>
             </tr>
-        </thead>
+            </thead>
         <tbody>
                 <?php foreach ($hotels as $hotel_arr) { ?>   
                     <tr>
-                        <?php foreach ($hotel_arr as $key => $hotel) {echo "$key: $hotel <br>"; ?>
-                            <td>Ciao</td> 
-                        <?php } ?>
+                        <td><?php echo $hotel_arr['name'] ?></td> 
+                        <td><?php echo $hotel_arr['description'] ?></td> 
+                        <td>
+                            <?php if ($hotel_arr['parking'] != true) {
+                                echo "No";
+                                } else {
+                                echo "Yes";
+                                }
+                            ?>
+                        </td> 
+                        <td><?php echo ucfirst($hotel_arr['vote']) ?> &star;</td> 
+                        <td><?php echo $hotel_arr['distance_to_center'] ?> km</td> 
                     </tr>
                 <?php } ?>
             </tbody>
